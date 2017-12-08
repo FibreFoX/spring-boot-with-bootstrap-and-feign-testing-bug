@@ -1,0 +1,11 @@
+gradle.ext {
+    versions = [
+        // backend-dependencies
+        springboot: '1.5.8.RELEASE'
+        ,springcloudstarteropenfeign: '1.4.0.RELEASE'
+        ,jacoco: '0.7.9'
+
+        // testing-dependencies
+        ,junit: '4.12'
+    ]
+}

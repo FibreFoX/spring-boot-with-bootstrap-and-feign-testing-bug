@@ -1,0 +1,51 @@
+buildscript {
+    apply from: "${rootProject.projectDir}/versions.gradle"
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${gradle.ext.versions.springboot}"
+    }
+}
+
+version '1.0.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+}
+
+test {
+    useJUnit()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter-web:${gradle.ext.versions.springboot}"
+	compile "org.springframework.cloud:spring-cloud-starter-openfeign:${gradle.ext.versions.springcloudstarteropenfeign}"
+    testCompile "junit:junit:${gradle.ext.versions.junit}"
+    testCompile "org.springframework.boot:spring-boot-starter-test:${gradle.ext.versions.springboot}"
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+
+jar {
+    baseName = 'spring-boot-with-feign-bug'
+    manifest {
+        attributes(
+            'Main-Class': 'de.dynamicfiles.projects.spring.feignconfigissue.MainClass'
+        )
+    }
+}
